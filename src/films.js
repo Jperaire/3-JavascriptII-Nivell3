@@ -36,16 +36,50 @@ function orderAlphabetically(movies) {
 }
 
 // Exercise 5: Order by year, ascending
-function orderByYear(movies) {}
+function orderByYear(movies) {
+  return [...movies].sort((a, b) => {
+    if (a.year === b.year) {
+      return a.title.localeCompare(b.title);
+    }
+    return a.year - b.year;
+  });
+}
 
 // Exercise 6: Calculate the average of the movies in a category
-function moviesAverageByCategory() {}
+function moviesAverageByCategory(movies, genre) {
+  const moviesByCategory = movies.filter((movie) =>
+    movie.genre.includes(genre)
+  );
+
+  if (moviesByCategory.length === 0) return 0;
+
+  let scoresSum = moviesByCategory.reduce((acc, movie) => acc + movie.score, 0);
+
+  return Number((scoresSum / moviesByCategory.length).toFixed(2));
+}
 
 // Exercise 7: Modify the duration of movies to minutes
-function hoursToMinutes() {}
+function hoursToMinutes(movies) {
+  const durationsArray = movies.map((movie) => movie.duration);
+  let min = 0;
+
+  for (let i = 0; i < durationsArray.length; i++) {
+    const bothDurations = durationsArray[i].split(' ');
+    const total = parseInt(bothDurations[0]) * 60 + parseInt(bothDurations[1]);
+    min += total;
+  }
+}
 
 // Exercise 8: Get the best film of a year
-function bestFilmOfYear() {}
+function bestFilmOfYear(movies, year) {
+  const bestsFilms = movies
+    .filter((movie) => movie.year === year)
+    .sort((a, b) => b.score - a.score);
+
+  if (bestsFilms.length === 0) return [];
+
+  return [bestsFilms[0]];
+}
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */

@@ -7,7 +7,7 @@ const {
   orderByYear,
   moviesAverageByCategory,
   hoursToMinutes,
-  bestFilmOfYear,
+  bestFilmOfYear
 } = require('../src/films');
 
 // Exercise 1
@@ -94,7 +94,6 @@ describe('Function "getMoviesFromDirector"', () => {
       }
     ]);
   });
-
 });
 
 // Exercise 3
@@ -104,7 +103,9 @@ describe('Function "moviesAverageOfDirector"', () => {
   });
 
   it('should return a number', () => {
-    expect(typeof moviesAverageOfDirector(movies, 'Stanley Kubrick')).toBe('number');
+    expect(typeof moviesAverageOfDirector(movies, 'Stanley Kubrick')).toBe(
+      'number'
+    );
   });
 
   it('should be different from NaN', () => {
@@ -112,34 +113,38 @@ describe('Function "moviesAverageOfDirector"', () => {
   });
 
   it(' should return the average score of movies selecting only the director films. With 2 decimals! ', () => {
-    expect(moviesAverageOfDirector([
-      {
-        title: 'Paths of Glory',
-        year: 1957,
-        director: 'Stanley Kubrick',
-        duration: '1h 28min',
-        genre: ['Drama', 'War'],
-        score: 8.4
-      },
-      {
-        title: 'Django Unchained',
-        year: 2012,
-        director: 'Quentin Tarantino',
-        duration: '2h 45min',
-        genre: ['Drama', 'Western'],
-        score: 8.4
-      },
-      {
-        title: 'Pulp Fiction',
-        year: 1994,
-        director: 'Quentin Tarantino',
-        duration: '2h 34min',
-        genre: ['Crime', 'Drama'],
-        score: 8.9
-      }
-    ], 'Quentin Tarantino')).toBe(8.65);
+    expect(
+      moviesAverageOfDirector(
+        [
+          {
+            title: 'Paths of Glory',
+            year: 1957,
+            director: 'Stanley Kubrick',
+            duration: '1h 28min',
+            genre: ['Drama', 'War'],
+            score: 8.4
+          },
+          {
+            title: 'Django Unchained',
+            year: 2012,
+            director: 'Quentin Tarantino',
+            duration: '2h 45min',
+            genre: ['Drama', 'Western'],
+            score: 8.4
+          },
+          {
+            title: 'Pulp Fiction',
+            year: 1994,
+            director: 'Quentin Tarantino',
+            duration: '2h 34min',
+            genre: ['Crime', 'Drama'],
+            score: 8.9
+          }
+        ],
+        'Quentin Tarantino'
+      )
+    ).toBe(8.65);
   });
-
 });
 
 // Exercise 4
@@ -291,10 +296,94 @@ describe('Function "orderByYear"', () => {
 });
 
 // Exercise 6
+// function moviesAverageByCategory(movies, genre) {
+//   const moviesByCategory = movies.filter((movie) =>
+//     movie.genre.includes(genre)
+//   );
+
+//   if (moviesByCategory.length === 0) return 0;
+
+//   let scoresSum = moviesByCategory.reduce((acc, movie) => acc + movie.score, 0);
+
+//   return Number((scoresSum / moviesByCategory.length).toFixed(2));
+// }
 // YOUR CODE HERE. Test moviesAverageByCategory()
 describe('Function "moviesAverageByCategory"', () => {
-  it('ADD YOUR CODE IN films.spec.js file', () => {
-    expect(typeof hoursToMinutes).toBe('coffee');
+  it('should be declared', () => {
+    expect(typeof moviesAverageByCategory).toBe('function');
+  });
+
+  it('should return a number', () => {
+    expect(typeof moviesAverageByCategory(movies, 'Drama')).toBe('number');
+  });
+
+  it('should be different from NaN', () => {
+    expect(moviesAverageByCategory(movies, 'Drama')).not.toBeNaN();
+  });
+
+  it(' should return the average score of movies from the same category. With 2 decimals! ', () => {
+    expect(
+      moviesAverageByCategory(
+        [
+          {
+            title: 'The Lion King',
+            year: 1994,
+            director: 'Roger Allers',
+            duration: '1h 28min',
+            genre: ['Animation', 'Adventure', 'Drama', 'Family', 'Musical'],
+            score: 8.5
+          },
+          {
+            title: 'Singin" in the Rain',
+            year: 1952,
+            director: 'Stanley Donen',
+            duration: '1h 43min',
+            genre: ['Comedy', 'Musical', 'Romance'],
+            score: 8.3
+          },
+          {
+            title: 'La La Land',
+            year: 2016,
+            director: 'Damien Chazelle',
+            duration: '2h 8min',
+            genre: ['Comedy', 'Drama', 'Music', 'Musical', 'Romance'],
+            score: 8.2
+          },
+          {
+            title: 'The Wizard of Oz',
+            year: 1939,
+            director: 'Victor Fleming',
+            duration: '1h 42min',
+            genre: ['Adventure', 'Family', 'Fantasy', 'Musical'],
+            score: 8.1
+          },
+          {
+            title: 'Sholay',
+            year: 1975,
+            director: 'Ramesh Sippy',
+            duration: '3h 18min',
+            genre: [
+              'Action',
+              'Adventure',
+              'Comedy',
+              'Drama',
+              'Musical',
+              'Thriller'
+            ],
+            score: 8.2
+          },
+          {
+            title: 'Beauty and the Beast',
+            year: 1991,
+            director: 'Gary Trousdale',
+            duration: '1h 24min',
+            genre: ['Animation', 'Family', 'Fantasy', 'Musical', 'Romance'],
+            score: 8
+          }
+        ],
+        'Musical'
+      )
+    ).toBe(8.22);
   });
 });
 
@@ -371,7 +460,7 @@ describe('Function "bestFilmOfYear"', () => {
         duration: '1h 28min',
         genre: ['Drama', 'War'],
         score: 5
-      },
+      }
     ];
     expect(bestFilmOfYear(testArr, 1957)).toEqual([
       {
@@ -384,5 +473,4 @@ describe('Function "bestFilmOfYear"', () => {
       }
     ]);
   });
-
 });
